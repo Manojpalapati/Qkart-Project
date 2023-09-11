@@ -1,7 +1,6 @@
 package QKART_SANITY_LOGIN.Module1;
 
 import java.sql.Timestamp;
-import javax.print.event.PrintEvent;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -37,7 +36,7 @@ public class Register {
             // Concatenate the timestamp to string to form unique timestamp
             test_data_username = Username + "_" + String.valueOf(timestamp.getTime());
         else
-             test_data_username = Username; //+ "_" + String.valueOf(timestamp.getTime());
+        test_data_username = Username;
 
         // Type the generated username in the username field
         username_txt_box.sendKeys(test_data_username);
@@ -63,7 +62,8 @@ public class Register {
         register_now_button.click();
         // Wait for registration to complete
         Thread.sleep(3000);
-        System.out.printf("output - 1", test_data_username, "output - 2", this.lastGeneratedUsername); 
+
+
         this.lastGeneratedUsername = test_data_username;
 
         return this.driver.getCurrentUrl().endsWith("/login");
