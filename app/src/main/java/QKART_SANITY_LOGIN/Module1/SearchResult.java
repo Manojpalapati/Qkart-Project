@@ -116,9 +116,25 @@ public class SearchResult {
              * Validate that the contents of expectedTableBody are present in the table body
              * in the same order
              */
-            WebElement sizeChartTable = parentElement.findElement(By.className("css-yg30e6"));
-            List <WebElement> tableHeaders = sizeChartTable.findElements(By.className("css-1rg3xbn"));
-            List <WebElement> tableRows = sizeChartTable.findElements(By.xpath("/html/body/div[3]/div[3]/div/div/table/tbody/tr/td"));
+            Thread.sleep(2000);
+            WebElement sizeChartTable = driver.findElement(By.xpath("/html/body/div[2]/div[3]/div"));
+            Thread.sleep(2000);
+            List <WebElement> tableHeaders = sizeChartTable.findElements(By.xpath("./div/table/thead/tr/th"));
+            Thread.sleep(2000);
+            List <WebElement> tableRows = sizeChartTable.findElements(By.xpath("./div/table/tbody/tr"));
+
+            // System.out.println("tableRows=");
+            // for(WebElement i:tableRows) {
+            //     System.out.println(i);
+            // }
+            // System.out.println("\ntableRows ended\n");
+
+            // System.out.println("tableHeaders=");
+            // for(WebElement i:tableHeaders) {
+            //     System.out.println(i.getText());
+            // }
+            // System.out.println("\ntableHeaders ended\n");
+
             for (int i = 0; i < expectedTableHeaders.size(); i++) {
                 String expectedHeader = expectedTableHeaders.get(i);
                 String actualHeader = tableHeaders.get(i).getText();
@@ -126,14 +142,18 @@ public class SearchResult {
                     return false;
                 }
             }
-            for (int i = 1; i < expectedTableBody.size(); i++) {
-                List<WebElement> tableCells = tableRows.get(i).findElements(By.className("/html/body/div[3]/div[3]/div/div/table/tbody/tr/td"));
-                List<String> expectedRow = expectedTableBody.get(i - 1);
-
-                for (int j = 0; j < expectedRow.size(); j++) {
-                    String expectedCell = expectedRow.get(j);
-                    String actualCell = tableCells.get(j).getText();
-                    if (!expectedCell.equals(actualCell)) {
+            for (int i = 0; i < expectedTableBody.size(); i++) {
+                List<String> expectedRowData = expectedTableBody.get(i);
+                List<WebElement> tableCells = tableRows.get(i).findElements(By.tagName("td")); // i + 1 to skip header row
+                if (expectedRowData.size() != tableCells.size()) {
+                    System.out.println("Row Data Mismatch: Expected=" + expectedRowData + ", Actual=" + tableCells);
+                    return false;
+                }
+                for (int j = 0; j < expectedRowData.size(); j++) {
+                    String expectedData = expectedRowData.get(j);
+                    String actualData = tableCells.get(j).getText();
+                    if (!expectedData.equals(actualData)) {
+                        System.out.println("Cell Data Mismatch: Expected='" + expectedData + "', Actual='" + actualData + "'");
                         return false;
                     }
                 }
