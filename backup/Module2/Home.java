@@ -29,7 +29,6 @@ public class Home {
             WebElement logout_button = driver.findElement(By.className("MuiButton-text"));
             logout_button.click();
 
-            // SLEEP_STMT_10: Wait for Logout to complete
             // Wait for Logout to Complete
             Thread.sleep(3000);
 
@@ -102,6 +101,7 @@ public class Home {
      */
     public Boolean addProductToCart(String productName) {
         try {
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
              * Iterate through each product on the page to find the WebElement corresponding
              * to the matching productName
@@ -139,8 +139,10 @@ public class Home {
     public Boolean clickCheckout() {
         Boolean status = false;
         try {
-            WebElement checkoutButton = driver.findElement(By.xpath("//button[text()='Checkout']"));
-            checkoutButton.click();
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
+            // Find and click on the the Checkout button                             
+            WebElement checkoutbutton = driver.findElement(By.xpath("//button[text()='Checkout']"));
+            checkoutbutton.click();
             return status;
         } catch (Exception e) {
             System.out.println("Exception while clicking on Checkout: " + e.getMessage());
@@ -161,6 +163,7 @@ public class Home {
             // Increment or decrement the quantity of the matching product until the current
             // quantity is reached (Note: Keep a look out when then input quantity is 0,
             // here we need to remove the item completely from the cart)
+
             List<WebElement> cartItems = driver.findElements(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div/div"));
 
             // Initialize a flag to check if the product was found in the cart
@@ -190,9 +193,6 @@ public class Home {
                         //update the currentQuantity here
                         currentQuantity = Integer.parseInt(cartItem.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/div")).getText());
                     }
-
-
-    
                    // if (quantity == 0) {
                         // Remove the item completely from the cart (click on a remove button or implement accordingly)
                     //    cartItem.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[1]")).click();

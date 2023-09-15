@@ -1,7 +1,8 @@
 package QKART_SANITY_LOGIN.Module1;
 
+import java.sql.Driver;
 import java.util.List;
-
+import javax.lang.model.element.Element;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -63,6 +64,7 @@ public class SearchResult {
             Thread.sleep(2000);
             Actions action = new Actions(driver);
 
+            // Clicking on "ESC" key closes the size chart modal
             action.sendKeys(Keys.ESCAPE);
             action.perform();
             Thread.sleep(2000);

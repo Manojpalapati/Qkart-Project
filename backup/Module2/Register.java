@@ -61,9 +61,8 @@ public class Register {
         // Click the register now button
         register_now_button.click();
         // Wait for registration to complete
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class,'SnackbarContent-root SnackbarItem-contentRoot')]")));
-        // SLEEP_STMT_06: Wait for new user to get created in the backend
+        Thread.sleep(3000);
+
 
         this.lastGeneratedUsername = test_data_username;
 

@@ -27,17 +27,19 @@ public class Checkout {
      */
     public Boolean addNewAddress(String addresString) {
         try {
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
              * Click on the "Add new address" button, enter the addressString in the address
              * text box and click on the "ADD" button to save the address
              */
             WebElement addNewAddress = driver.findElement(By.xpath("//*[@id='add-new-btn']"));
             addNewAddress.click();
-            WebDriverWait wait = new WebDriverWait(driver, 5);
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/div[2]/div[1]/div/textarea[1]")));
+            Thread.sleep(2000);
             WebElement Addressbox = driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/div[2]/div[1]/div/textarea[1]"));
             Addressbox.clear();
+            Thread.sleep(2000);
             Addressbox.sendKeys(addresString);
+            WebDriverWait wait = new WebDriverWait(driver, 5);
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/div[2]/div[2]/button[1]")));
             
             List <WebElement> buttons = driver.findElements(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/div[2]/div[2]/button"));
@@ -62,6 +64,7 @@ public class Checkout {
      */
     public Boolean selectAddress(String addressToSelect) {
         try {
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
              * Iterate through all the address boxes to find the address box with matching
              * text, addressToSelect and click on it
@@ -73,8 +76,7 @@ public class Checkout {
 
             if (addressText.contains(addressToSelect)) {
                 addressBox.click();
-                WebDriverWait wait = new WebDriverWait(driver, 10); // Adjust the timeout as needed
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='PLACE ORDER']")));
+                Thread.sleep(3000);
                 return true;
             }
         } 
@@ -87,7 +89,7 @@ public class Checkout {
 
     }
 
-    /*
+    /*s
      * Return Boolean denoting the status of place order action
      */
     public Boolean placeOrder() {
@@ -95,10 +97,9 @@ public class Checkout {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find the "PLACE ORDER" button and click on it
 
-           WebElement placeOrder = driver.findElement(By.xpath("//button[text()='PLACE ORDER']"));
+            WebElement placeOrder = driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/button[2]"));
             placeOrder.click();
-            WebDriverWait wait = new WebDriverWait(driver, 10); // Adjust the timeout as needed
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@class,'SnackbarContent-root SnackbarItem-contentRoot')]")));
+            Thread.sleep(3000);
             return true;
 
         } catch (Exception e) {
