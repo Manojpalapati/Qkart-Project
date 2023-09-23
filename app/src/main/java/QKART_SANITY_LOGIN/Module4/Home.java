@@ -214,13 +214,13 @@ public class Home {
             // Iterate through expectedCartContents and check if item with matching product
             // name is present in the cart
 
-            WebElement cartParent = driver.findElement(By.className("cart"));
-            List<WebElement> cartContents = cartParent.findElements(By.className("css-zgtx0t"));
+            WebElement cartParent = driver.findElement(By.xpath("(//div[contains(@class,'cart MuiBox-root')])[1]"));
+            List<WebElement> cartContents = cartParent.findElements(By.xpath("(//div[@class='MuiBox-root css-zgtx0t'])"));
 
             ArrayList<String> actualCartContents = new ArrayList<String>() {
             };
             for (WebElement cartItem : cartContents) {
-                actualCartContents.add(cartItem.findElement(By.className("css-1gjj37g")).getText().split("\n")[0]);
+                actualCartContents.add(cartItem.findElement(By.xpath("(//div[@class='MuiBox-root css-1gjj37g'])")).getText().split("\n")[0]);
             }
 
             for (String expected : expectedCartContents) {
